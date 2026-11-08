@@ -545,6 +545,8 @@
         offset = same ? offset + prev.offsetHeight : 0;
         s.style.backgroundPosition = same ? "center " + (-offset) + "px" : "";
       });
+      // Zoom mengubah tinggi halaman; hitung ulang posisi pemicu animasi agar tidak macet transparan
+      if (window.ScrollTrigger && ScrollTrigger.refresh) ScrollTrigger.refresh();
     };
     const req = () => { if (!raf) raf = requestAnimationFrame(fit); };
     addEventListener("resize", req);
