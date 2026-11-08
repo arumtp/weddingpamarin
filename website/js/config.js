@@ -50,9 +50,7 @@ window.WEDDING = {
 
   gifts: [
     { bank: "BCA", number: "3660378200", name: "Arinda Kusuma Wardani" },
-    { bank: "BRI", number: "616801017661534", name: "Arum Tri Pamungkas" },
-    { bank: "DANA", number: "089531861678", name: "Arum Tri Pamungkas" },
-    { bank: "SeaBank", number: "901765889047", name: "Arum Tri Pamungkas" }
+    { bank: "DANA", number: "089531861678", name: "Arum Tri Pamungkas" }
   ],
   giftAddress: {
     text: "Jl. Kahuripan No. 3 RT.3 RW.2 Desa Garum, Kec. Garum, Kab. Blitar",
