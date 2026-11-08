@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pernikahan Arin &amp; Pam</title>
+  <meta name="description" content="Undangan pernikahan Arin &amp; Pam — Sabtu, 5 Desember 2026.">
+  <meta name="theme-color" content="#1E2B1C">
+  <meta property="og:title" content="Pernikahan Arin &amp; Pam">
+  <meta property="og:description" content="Sabtu, 5 Desember 2026 · Kami mengundang Anda untuk hadir di hari bahagia kami.">
+  <meta property="og:image" content="img/wallpaper.webp">
+
+  <!-- Preload hanya aset cover -->
+  <link rel="preload" as="image" href="img/bg-curtain.webp">
+  <link rel="preload" as="image" href="img/envelope-closed.webp">
+  <link rel="preload" as="image" href="img/wax-seal.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Allura&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-locked">
+
+<!-- Wallpaper (hanya tampil di desktop, 40% kiri) -->
+<aside class="wallpaper" aria-hidden="true">
+  <div class="petals" id="petals"></div>
+  <div class="wallpaper__inner">
+    <p class="wallpaper__of">Pernikahan</p>
+    <p class="wallpaper__names"><span data-bind="bride.nick"></span> &amp; <span data-bind="groom.nick"></span></p>
+    <p class="wallpaper__date" data-bind="dateText"></p>
+  </div>
+</aside>
+
+<!-- =================================================================== COVER -->
+<section id="cover" class="cover" aria-label="Sampul undangan">
+  <img class="cover__flower cover__flower--tl sway" src="img/flower-hanging.webp" alt="" aria-hidden="true">
+  <img class="cover__flower cover__flower--br sway sway--rev" src="img/flower-stand.webp" alt="" aria-hidden="true">
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <div class="cover__inner">
+    <p class="script script--sm">Kami</p>
+    <p class="eyebrow">Akan Menikah</p>
+    <h1 class="script script--xl cover__names"><span data-bind="bride.nick"></span> &amp; <span data-bind="groom.nick"></span></h1>
+
+    <div class="guest" id="guest" hidden>
+      <p class="guest__label">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+      <p class="guest__name" id="guestName"></p>
+      <p class="guest__note">*mohon maaf apabila ada kesalahan penulisan nama/gelar</p>
+    </div>
+
+    <button class="envelope" id="openEnvelope" type="button" aria-label="Buka undangan">
+      <img class="envelope__open" src="img/envelope-open.webp" alt="" aria-hidden="true">
+      <span class="envelope__card" aria-hidden="true">
+        <span class="script script--md"><span data-bind="bride.nick"></span> &amp; <span data-bind="groom.nick"></span></span>
+        <span class="envelope__card-date" data-bind="dateShort"></span>
+      </span>
+      <img class="envelope__closed" src="img/envelope-closed.webp" alt="" aria-hidden="true">
+      <img class="envelope__seal" src="img/wax-seal.webp" alt="" aria-hidden="true">
+    </button>
+
+    <p class="cover__hint pulse">Klik amplop untuk membuka</p>
+  </div>
+</section>
+
+<!-- =================================================================== APP -->
+<div class="app" id="app">
+<main>
+
+  <!-- 1. QUOTE + MUSIC -->
+  <section id="home" class="sec sec--curtain sec--quote">
+    <img class="deco deco--hang-left sway" src="img/flower-hanging-2.webp" alt="" aria-hidden="true" loading="lazy">
+    <div class="doily reveal-zoom">
+      <p class="doily__text" data-bind="quote.text"></p>
+      <p class="doily__src" data-bind="quote.source"></p>
+      <img class="doily__butterfly flutter" src="img/butterfly.webp" alt="" aria-hidden="true" loading="lazy">
+      <img class="doily__tassel swing" src="img/tassel.webp" alt="" aria-hidden="true" loading="lazy">
+    </div>
+
+    <div class="open-envelope reveal-up">
+      <img class="open-envelope__img" src="img/envelope-open.webp" alt="" aria-hidden="true" loading="lazy">
+      <img class="open-envelope__seal" src="img/wax-seal.webp" alt="" aria-hidden="true" loading="lazy">
+    </div>
+  </section>
+
+  <!-- 2. MEMPELAI -->
+  <section id="mempelai" class="sec sec--velvet">
+    <img class="bismillah reveal-up" src="img/bismillah.svg" alt="Bismillahirrahmanirrahim" loading="lazy">
+    <p class="lead reveal-up">Assalamu'alaikum Warahmatullahi Wabarakatuh.<br>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang<br>Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:</p>
+
+    <article class="couple couple--bride">
+      <figure class="arch reveal-zoom">
+        <img data-bind-src="bride.photo" alt="Foto mempelai wanita" loading="lazy">
+        <span class="arch__star arch__star--l">✦</span><span class="arch__star arch__star--r">✦</span>
+      </figure>
+      <div class="couple__text reveal-up">
+        <h2 class="script script--lg write" data-bind="bride.full"></h2>
+        <p class="couple__parents"><span data-bind="bride.order"></span> dari<br>Bapak <span data-bind="bride.father"></span> &amp; Ibu <span data-bind="bride.mother"></span></p>
+        <a class="ig" data-ig="bride" hidden target="_blank" rel="noopener">@<span></span></a>
+      </div>
+    </article>
+
+    <p class="amp script reveal-zoom" aria-hidden="true">&amp;</p>
+
+    <article class="couple couple--zig">
+      <div class="couple__text reveal-left">
+        <h2 class="script script--lg write" data-bind="groom.full"></h2>
+        <p class="couple__parents"><span data-bind="groom.order"></span> dari<br>Bapak <span data-bind="groom.father"></span> &amp; Ibu <span data-bind="groom.mother"></span></p>
+        <a class="ig" data-ig="groom" hidden target="_blank" rel="noopener">@<span></span></a>
+      </div>
+      <figure class="arch arch--sm reveal-right">
+        <img data-bind-src="groom.photo" alt="Foto mempelai pria" loading="lazy">
+        <span class="arch__star arch__star--l">✦</span><span class="arch__star arch__star--r">✦</span>
+      </figure>
+    </article>
+    <img class="deco deco--br reveal-right" src="img/flower-small.webp" alt="" aria-hidden="true" loading="lazy">
+  </section>
+
+  <!-- 3. SAVE THE DATE & ACARA -->
+  <section id="acara" class="sec sec--olive">
+    <div class="bigdate reveal-up">
+      <span class="bigdate__y" data-bind="dateYear"></span>
+      <span class="bigdate__m" data-bind="dateMonth"></span>
+      <span class="bigdate__d" data-bind="dateDay"></span>
+    </div>
+    <p class="summary reveal-up" id="eventSummary"></p>
+
+    <div class="std reveal-zoom">
+      <h2 class="script script--xl write">Simpan Tanggalnya</h2>
+      <img class="std__butterfly flutter" src="img/butterfly-2.webp" alt="" aria-hidden="true" loading="lazy">
+    </div>
+
+    <div class="countdown reveal-up" id="countdown" role="timer" aria-live="off">
+      <div><b id="cdD">00</b><span>Hari</span></div>
+      <div><b id="cdH">00</b><span>Jam</span></div>
+      <div><b id="cdM">00</b><span>Menit</span></div>
+      <div><b id="cdS">00</b><span>Detik</span></div>
+    </div>
+    <a class="btn btn--ghost reveal-up" id="addCal" target="_blank" rel="noopener">Simpan ke Google Calendar</a>
+
+  </section>
+
+  <section id="acara-2" class="sec sec--olive">
+    <div id="events"></div>
+
+
+    <div class="dress reveal-up">
+      <h3 class="script script--md">Dress Code</h3>
+      <p data-bind="dressCode.text"></p>
+      <div class="dress__colors" id="dressColors"></div>
+    </div>
+  </section>
+
+  <!-- 4. WEDDING GIFT -->
+  <section id="gift" class="sec sec--velvet">
+    <div class="gift__hero reveal-zoom">
+      <div class="sparkles sparkles--gift" aria-hidden="true"></div>
+      <img class="gift__icon" src="img/gift-box.svg" alt="" aria-hidden="true" loading="lazy">
+    </div>
+    <h2 class="script script--xl write">Hadiah Pernikahan</h2>
+    <p class="lead reveal-up">Doa restu Anda merupakan karunia yang sangat berarti bagi kami.<br>Namun jika memberi adalah ungkapan tanda kasih Anda,<br>Anda dapat memberi kado secara cashless melalui:</p>
+    <div id="giftCards"></div>
+    <div class="card card--cream reveal-up">
+      <h3 class="card__title">Kirim Hadiah</h3>
+      <p id="giftAddress"></p>
+      <button class="btn btn--maroon btn--sm" type="button" id="copyAddress">Salin Alamat</button>
+      <p class="card__small">Konfirmasi via WhatsApp: <a id="giftWa" target="_blank" rel="noopener"></a></p>
+    </div>
+  </section>
+
+  <!-- 5. RSVP & GUEST WALL -->
+
+  <!-- 6. VIDEO -->
+  <section id="rsvp" class="sec sec--curtain sec--rsvp">
+    <div class="rsvp reveal-up">
+      <p class="eyebrow">RSVP</p>
+      <h2 class="script script--lg"><span data-bind="bride.nick"></span> &amp; <span data-bind="groom.nick"></span></h2>
+      <p class="rsvp__date" data-bind="dateLong"></p>
+      <p class="rsvp__loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> <span data-bind="events.1.venue"></span></p>
+
+      <form id="rsvpForm" class="rsvp__form" novalidate>
+        <fieldset class="rsvp__choice">
+          <legend class="sr-only">Konfirmasi kehadiran</legend>
+          <label><input type="radio" name="attend" value="Hadir" required><span>🎉 Hadir</span></label>
+          <label><input type="radio" name="attend" value="Tidak Hadir"><span>😢 Tidak Hadir</span></label>
+        </fieldset>
+        <label class="field"><span>Nama</span><input name="name" id="rsvpName" maxlength="60" required autocomplete="name"></label>
+        <label class="field" id="guestCountField"><span>Jumlah tamu</span><select name="count" id="rsvpCount"></select></label>
+        <label class="field"><span>Ucapan &amp; doa</span><textarea name="message" rows="4" maxlength="500" placeholder="Tulis ucapan untuk kedua mempelai…"></textarea></label>
+        <button class="btn btn--cream" type="submit" id="rsvpSubmit">Kirim</button>
+        <p class="rsvp__status" id="rsvpStatus" role="status"></p>
+      </form>
+    </div>
+
+  </section>
+
+  <section id="video" class="sec sec--velvet sec--video" hidden>
+    <h2 class="script script--lg write">Our Moments</h2>
+    <div class="video-frame reveal-zoom" id="videoFrame"></div>
+  </section>
+
+  <!-- 7. LOVE STORY -->
+  <section id="story" class="sec sec--olive">
+    <div class="polaroids">
+      <figure class="polaroid polaroid--a reveal-left"><img src="img/polar2.webp" alt="Momen berdua" loading="lazy"></figure>
+      <figure class="polaroid polaroid--b reveal-right"><img src="img/polar1.webp" alt="Bergandengan tangan" loading="lazy"></figure>
+      <img class="polaroids__seal" src="img/wax-seal.webp" alt="" aria-hidden="true" loading="lazy">
+      <img class="polaroids__flower sway" src="img/calla-lily.webp" alt="" aria-hidden="true" loading="lazy">
+    </div>
+    <h2 class="script script--xl write">Kisah Cinta</h2>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <!-- 8. GALLERY -->
+  <section id="gallery" class="sec sec--velvet">
+    <h2 class="script script--xl write">Galeri</h2>
+    <div class="grid" id="galleryGrid"></div>
+  </section>
+
+  <!-- 9. PENUTUP -->
+  <section id="closing" class="sec sec--curtain sec--closing">
+    <img class="deco deco--hang-left sway" src="img/flower-hanging.webp" alt="" aria-hidden="true" loading="lazy">
+    <img class="deco deco--hang-right sway sway--rev" src="img/flower-hanging-2.webp" alt="" aria-hidden="true" loading="lazy">
+    <div class="closing reveal-zoom">
+      <p>Menjadi sebuah kebahagiaan bagi<br>kami apabila Bapak/Ibu/Saudara/i<br>berkenan hadir dan memberikan<br>doa restu.</p>
+      <p>Atas kehadiran dan doa restunya,<br>kami ucapkan terima kasih.</p>
+      <p class="closing__see">Sampai jumpa di hari pernikahan<br>kami!</p>
+      <p class="closing__wa">Wassalamu'alaikum<br>Warahmatullahi Wabarakatuh.</p>
+      <h2 class="script script--xl"><span data-bind="bride.nick"></span> &amp; <span data-bind="groom.nick"></span></h2>
+    </div>
+  </section>
+
+  <footer class="foot">Selalu bersyukur atas hari ini, jangan lupa bahagia. Salam sayang untuk semua - <span data-bind="bride.nick"></span> &amp; <span data-bind="groom.nick"></span></footer>
+</main>
+
+<!-- Floating music toggle -->
+<button class="fab" id="fabMusic" type="button" aria-label="Putar / jeda musik" hidden>
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+</button>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Galeri foto">
+  <button class="lightbox__close" type="button" aria-label="Tutup">×</button>
+  <button class="lightbox__nav lightbox__prev" type="button" aria-label="Foto sebelumnya">‹</button>
+  <img class="lightbox__img" alt="">
+  <button class="lightbox__nav lightbox__next" type="button" aria-label="Foto berikutnya">›</button>
+  <p class="lightbox__count"></p>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<audio id="audio" preload="none"></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
