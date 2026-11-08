@@ -545,11 +545,13 @@
         offset = same ? offset + prev.offsetHeight : 0;
         s.style.backgroundPosition = same ? "center " + (-offset) + "px" : "";
       });
-      // Zoom mengubah tinggi halaman; hitung ulang posisi pemicu animasi agar tidak macet transparan
-      if (window.ScrollTrigger && ScrollTrigger.refresh) ScrollTrigger.refresh();
     };
     const req = () => { if (!raf) raf = requestAnimationFrame(fit); };
-    addEventListener("resize", req);
+    let lw = innerWidth, lh = innerHeight;
+    addEventListener("resize", () => {
+      if (innerWidth === lw && Math.abs(innerHeight - lh) < 160) return;
+      lw = innerWidth; lh = innerHeight; req();
+    });
     addEventListener("load", req);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(req);
     if (window.ResizeObserver) { const ro = new ResizeObserver(req); secs.forEach((s) => ro.observe(s.querySelector(":scope > .sec__fit"))); }
@@ -560,21 +562,28 @@
      Scroll animations (GSAP + ScrollTrigger)
      ========================================================================== */
   function initAnimations() {
-    if (!hasGsap() || !window.ScrollTrigger || reduceMotion) return;
-    gsap.registerPlugin(ScrollTrigger);
-    const st = (t) => ({ trigger: t, start: "top 88%", once: true });
+    if (!hasGsap() || reduceMotion) return;
+    // Pemicu berbasis IntersectionObserver (tidak bergantung hitungan posisi, aman terhadap zoom/resize di HP)
+    const play = (tw, target) => {
+      if (!("IntersectionObserver" in window)) { tw.play(); return; }
+      const io = new IntersectionObserver((es) => {
+        if (es.some((e) => e.isIntersecting)) { io.disconnect(); tw.play(); }
+      }, { rootMargin: "0px 0px -8% 0px" });
+      io.observe(target);
+    };
+    const reveal = (sel, vars, host) => $$(sel).forEach((n) => play(gsap.from(n, { ...vars, paused: true }), host ? n.parentElement : n));
 
-    $$(".reveal-up").forEach((n) => gsap.from(n, { y: 40, opacity: 0, duration: 1, ease: "power2.out", scrollTrigger: st(n) }));
-    $$(".reveal-zoom").forEach((n) => gsap.from(n, { scale: .9, opacity: 0, duration: 1.1, ease: "power2.out", scrollTrigger: st(n) }));
-    $$(".reveal-left").forEach((n) => gsap.from(n, { x: -60, opacity: 0, duration: 1, ease: "power2.out", scrollTrigger: st(n) }));
-    $$(".reveal-right").forEach((n) => gsap.from(n, { x: 60, opacity: 0, duration: 1, ease: "power2.out", scrollTrigger: st(n) }));
+    reveal(".reveal-up", { y: 40, opacity: 0, duration: 1, ease: "power2.out" });
+    reveal(".reveal-zoom", { scale: .9, opacity: 0, duration: 1.1, ease: "power2.out" });
+    reveal(".reveal-left", { x: -60, opacity: 0, duration: 1, ease: "power2.out" });
+    reveal(".reveal-right", { x: 60, opacity: 0, duration: 1, ease: "power2.out" });
     // Teks script "ditulis": clip-path dari kiri
-    $$(".write").forEach((n) => gsap.fromTo(n,
+    $$(".write").forEach((n) => play(gsap.fromTo(n,
       { clipPath: "inset(0 100% 0 0)" },
-      { clipPath: "inset(0 -10% 0 0)", duration: 1.6, ease: "power2.inOut", scrollTrigger: st(n) }));
+      { clipPath: "inset(0 -10% 0 0)", duration: 1.6, ease: "power2.inOut", paused: true }), n));
     // Bunga masuk dari samping
-    $$(".deco--hang-left").forEach((n) => gsap.from(n, { x: -80, opacity: 0, duration: 1.4, ease: "power2.out", scrollTrigger: st(n.parentElement) }));
-    $$(".deco--hang-right").forEach((n) => gsap.from(n, { x: 80, opacity: 0, duration: 1.4, ease: "power2.out", scrollTrigger: st(n.parentElement) }));
+    reveal(".deco--hang-left", { x: -80, opacity: 0, duration: 1.4, ease: "power2.out" }, true);
+    reveal(".deco--hang-right", { x: 80, opacity: 0, duration: 1.4, ease: "power2.out" }, true);
 
     // Animasi masuk cover
     gsap.from(".cover__inner > *", { y: 24, opacity: 0, duration: .9, stagger: .12, ease: "power2.out", delay: .2 });
