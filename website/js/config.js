@@ -9,7 +9,7 @@ window.WEDDING = {
     full: "Arinda Kusuma Wardani",
     order: "Putri ke-1",
     father: "Andhika Jaya Kusuma",
-    mother: "Nur Siti Khomariyah",
+    mother: "Siti Nur Khomariyah",
     photo: "img/arinda.webp",
     instagram: "arindkusuma"
   },
